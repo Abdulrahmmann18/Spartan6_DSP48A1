@@ -14,12 +14,10 @@ module Register_and_mux_pair #(parameter WIDTH = 18, REG_SEL = 0, RSTTYPE = "SYN
 			if (RSTTYPE == "SYNC") begin
 				// sync rst type
 				always @(posedge clk) begin
-					if (CE) begin
-						if (rst)
-							D_OUT <= 'b0;
-						else
-							D_OUT <= D_IN;
-					end
+					if (rst)
+						D_OUT <= 'b0;
+					else if (CE) 
+						D_OUT <= D_IN;
 				end
 			end
 			else if (RSTTYPE == "ASYNC") begin
